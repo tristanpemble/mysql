@@ -3,7 +3,7 @@
 ARG BUILD_ARCH
 
 # Changed from original - end: don't inherit from debian:jessie, because mysql-server-5.7 don't exist on debian:jessie arm apt-get repo
-FROM ${BUILD_ARCH}ubuntu:bionic
+FROM public.ecr.aws/docker/library/ubuntu:bionic
 # Changed from original - end
 # Changed from original - start: add one line to override the maintainer
 MAINTAINER Brother In Arms <project.biarms@gmail.com>
@@ -103,10 +103,6 @@ RUN ln -fs /usr/share/zoneinfo/Europe/Paris /etc/localtime && apt-get update && 
 
 EXPOSE 3306
 CMD ["mysqld"]
-
-# Changed from original: next line was added
-# (inspired by https://github.com/rothgar/rpi-wordpress/blob/master/mysql/Dockerfile)
-ADD my-small.cnf /etc/mysql/conf.d/my.cnf
 
 ARG VCS_REF
 ARG BUILD_DATE
